@@ -1,0 +1,11 @@
+<configuration>
+    <appender name="InMemory" class="com.test.bnpparibas.nelima.config.InMemoryAppender" />
+
+    <root level="INFO">
+        <appender-ref ref="InMemory" />
+    </root>
+
+    <logger name="com.test.bnpparibas.nelima.config" level="DEBUG" additivity="false">
+        <appender-ref ref="InMemory" />
+    </logger>
+</configuration>

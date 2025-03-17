@@ -3,6 +3,7 @@ package com.test.bnpparibas.nelima.domain;
 import com.test.bnpparibas.nelima.enums.OrientationEnum;
 import com.test.bnpparibas.nelima.enums.RotationEnum;
 import com.test.bnpparibas.nelima.exeption.RoverException;
+import com.test.bnpparibas.nelima.utils.ErrorMessageConstants;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -53,7 +54,7 @@ public class Rover {
             case EAST -> x++;
             case SOUTH -> y--;
             case WEST -> x--;
-            default -> throw new RoverException("Invalid orientation code: " + orientation);
+            default -> throw new RoverException(ErrorMessageConstants.INVALID_ORIENTATION_CODE + ": " + orientation);
         }
     }
 

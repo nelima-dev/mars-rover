@@ -3,6 +3,7 @@ package com.test.bnpparibas.nelima.infra;
 import com.test.bnpparibas.nelima.domain.Plateau;
 import com.test.bnpparibas.nelima.domain.Rover;
 import com.test.bnpparibas.nelima.exeption.RoverException;
+import com.test.bnpparibas.nelima.utils.ErrorMessageConstants;
 import com.test.bnpparibas.nelima.utils.InputData;
 import lombok.AllArgsConstructor;
 
@@ -29,7 +30,7 @@ public class InputReader {
         File file = new File(filename);
         // Check if the file exists and is not empty
         if (!file.exists() || file.length() == 0) {
-            throw new RoverException("Input file is empty or invalid");
+            throw new RoverException(ErrorMessageConstants.EMPTY_OR_INVALID_FILE);
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -45,7 +46,7 @@ public class InputReader {
                 String[] roverData = line.split(" ");
                 // Check if the rover data format is valid
                 if (roverData.length != 3) {
-                    throw new RoverException("Invalid rover data format at line " + lineNumber);
+                    throw new RoverException(ErrorMessageConstants.INVALID_ROVER_DATA_FORMAT + " " + lineNumber);
                 }
 
                 // Parse the rover data and add it to the list
@@ -54,7 +55,7 @@ public class InputReader {
                 String instructions = reader.readLine();
                 // Check if instructions are present
                 if (instructions == null || instructions.trim().isEmpty()) {
-                    throw new RoverException("Missing instructions for rover at line " + lineNumber);
+                    throw new RoverException(ErrorMessageConstants.MISSING_INSTRUCTION_FOR_ROVER + " " + lineNumber);
                 }
                 instructionsList.add(instructions);
                 lineNumber += 2; // Increment by 2 for rover data and instructions
@@ -62,7 +63,7 @@ public class InputReader {
 
             return new InputData(plateau, rovers, instructionsList);
         } catch (IOException e) {
-            throw new RoverException("Error reading file: " + e.getMessage());
+            throw new RoverException(ErrorMessageConstants.READ_FILE_ERROR + ": " + e.getMessage());
         }
     }
 
@@ -75,13 +76,13 @@ public class InputReader {
     private static Plateau getPlateau(String firstLine) {
         // Check if the first line is empty or null
         if (firstLine == null || firstLine.trim().isEmpty()) {
-            throw new RoverException("File does not contain plateau dimensions.");
+            throw new RoverException(ErrorMessageConstants.EMPTY_PLATEAU_DIMENSION);
         }
 
         String[] plateauDimensions = firstLine.split(" ");
         // Check if the plateau dimensions format is valid
         if (plateauDimensions.length != 2) {
-            throw new RoverException("Invalid plateau dimensions format.");
+            throw new RoverException(ErrorMessageConstants.INVALID_PLATEAU_DIMENSION_FORMAT);
         }
 
         try {
@@ -90,7 +91,7 @@ public class InputReader {
             int maxY = Integer.parseInt(plateauDimensions[1]);
             return new Plateau(maxX, maxY);
         } catch (NumberFormatException e) {
-            throw new RoverException("Invalid plateau dimensions (must be integers).");
+            throw new RoverException(ErrorMessageConstants.NAN_PLATEAU_DIMENSION);
         }
     }
 
@@ -109,7 +110,7 @@ public class InputReader {
             char orientation = roverData[2].charAt(0);
             return new Rover(x, y, orientation);
         } catch (NumberFormatException e) {
-            throw new RoverException("Invalid rover data (x and y must be integers) at line " + lineNumber);
+            throw new RoverException(ErrorMessageConstants.NAN_ROVER_DATA + " " + lineNumber);
         }
     }
 }

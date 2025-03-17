@@ -4,6 +4,7 @@ import com.test.bnpparibas.nelima.exeption.RoverException;
 import com.test.bnpparibas.nelima.infra.InputReader;
 import com.test.bnpparibas.nelima.infra.OutputWriter;
 import com.test.bnpparibas.nelima.service.RoverService;
+import com.test.bnpparibas.nelima.utils.ErrorMessageConstants;
 import com.test.bnpparibas.nelima.utils.InputData;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,8 +41,7 @@ public class MarsRoverApplication {
             outputWriter.writeOutput(inputData.rovers());
 
         } catch (RoverException e) {
-            log.error("Application error: {}", e.getMessage());
-            System.exit(1);
+            log.error(ErrorMessageConstants.APPLICATION_ERROR + ": {}", e.getMessage());
         }
     }
 }

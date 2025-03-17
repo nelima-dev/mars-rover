@@ -81,7 +81,9 @@ Which means:
 Unit tests are written with JUnit 5.
 
 To run the tests, use the following command:
+    ```bash
+    mvn test
+    ```
 
-mvn test
 
 

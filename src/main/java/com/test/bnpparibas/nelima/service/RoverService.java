@@ -4,6 +4,7 @@ import com.test.bnpparibas.nelima.domain.Plateau;
 import com.test.bnpparibas.nelima.domain.Rover;
 import com.test.bnpparibas.nelima.enums.RotationEnum;
 import com.test.bnpparibas.nelima.exeption.RoverException;
+import com.test.bnpparibas.nelima.utils.ErrorMessageConstants;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,7 +38,7 @@ public class RoverService {
                         log.warn("Rover went out of bounds, reverted move: {}", rover);
                     }
                 }
-                default -> throw new RoverException("Invalid instruction: " + instruction);
+                default -> throw new RoverException(ErrorMessageConstants.INVALID_INSTRUCTION + ": " + instruction);
             }
         }
     }

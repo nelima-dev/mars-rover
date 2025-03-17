@@ -1,6 +1,7 @@
 package com.test.bnpparibas.nelima.enums;
 
 import com.test.bnpparibas.nelima.exeption.RoverException;
+import com.test.bnpparibas.nelima.utils.ErrorMessageConstants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -30,7 +31,7 @@ public enum OrientationEnum {
                 return orientation;
             }
         }
-        throw new RoverException("Invalid orientation code: " + code);
+        throw new RoverException(ErrorMessageConstants.INVALID_ORIENTATION_CODE + ": " + code);
     }
 
     /**
